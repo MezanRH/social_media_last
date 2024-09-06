@@ -1,14 +1,12 @@
-import React from 'react'
-import Header from './header'
+import React from "react";
+import Header from "./header";
 
 const PostHome = () => {
   return (
     <>
-    <div>
-      <Header/>
-    </div>
+      <div>This is my post</div>
     </>
-  )
-}
+  );
+};
 
-export default PostHome
+export default PostHome;
