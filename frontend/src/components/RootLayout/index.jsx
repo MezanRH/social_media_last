@@ -7,8 +7,8 @@ import RightHome from "../HomeComponents/RightPart";
 const RootLayout = () => {
   return (
     <>
-      <div className=" mx-20 grid grid-cols-[1fr,3fr,1fr] gap-x-10 mt-10">
-        <div>
+      <div className=" mx-5 3xl:mx-20 grid grid-cols-1 lg:grid-cols-[70px,1fr] xl:grid-cols-[100px,3fr,1fr] 2xl:grid-cols-[1fr,3fr,1fr] gap-x-10 mt-5 lg:mt-10">
+        <div className="hidden lg:block">
           <LeftPart />
         </div>
         <div>
@@ -17,7 +17,7 @@ const RootLayout = () => {
           </div>
           <Outlet />
         </div>
-        <div>
+        <div className="hidden xl:block">
           <RightHome/>
         </div>
       </div>

@@ -38,7 +38,8 @@ export default {
         lg: "992px",
         xl: "1200px",
         "2xl": "1400px",
-        "3xl": "1620px"
+        "3xl": "1620px",
+        "4xl": "1750px"
       },
       container: {
         center: true
