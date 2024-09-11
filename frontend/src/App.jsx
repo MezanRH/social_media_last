@@ -12,14 +12,15 @@ import Login from "./pages/login";
 import NotLoggedinUser from "./privateRouter/NotLoggedinUser";
 import LoggedinUser from "./privateRouter/LoggedinUser";
 import RootLayout from "./components/RootLayout";
-import 'swiper/css';
+import "swiper/css";
+import CreatePostPopup from "./components/HomeComponents/PostHome/createPostPopup";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route element={<LoggedinUser />}>
-        <Route element={<RootLayout/>}>
-        <Route path='/' element={<Home/>}/>
+        <Route element={<RootLayout />}>
+          <Route path="/" element={<Home />} />
         </Route>
       </Route>
       <Route element={<NotLoggedinUser />}>
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
 function App() {
   return (
     <>
+      <CreatePostPopup />
       <RouterProvider router={router} />
     </>
   );
