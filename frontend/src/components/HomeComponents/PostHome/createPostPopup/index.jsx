@@ -2,9 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { CircleCloseIcon } from "../../../../svg/CircleClose";
 import Addpost from "./Addpost";
 import EmojiPickers from "./EmojiPickers";
+import Imageviewer from "./Imageviewer";
 
 const CreatePostPopup = () => {
   const [text, setText] = useState("");
+  const [show, setShow] = useState(false);
+  const [image, setImage] = useState([]);
   const textRef = useRef(null);
 
   return (
@@ -25,24 +28,27 @@ const CreatePostPopup = () => {
               One Year Academy
             </h4>
           </div>
-          <div className="mt-5">
-            <textarea
-              ref={textRef}
-              value={text}
-              maxLength={100}
-              onChange={(e) => setText(e.target.value)}
-              placeholder="What's up say something"
-              className="w-full min-h-24 outline-none p-2 font-noto font-medium text-base"
-            />
-          </div>
-          <div className="flex items-center justify-between mb-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-cyan-100 to-purple-100 rounded-md cursor-pointer"></div>
-            <EmojiPickers text={text} textRef={textRef} setText={setText}/>
-          </div>
+          {!show ? (
+            <>
+              <EmojiPickers text={text} textRef={textRef} setText={setText} />
+            </>
+          ) : (
+            <>
+              <Imageviewer
+                text={text}
+                textRef={textRef}
+                setText={setText}
+                image={image}
+                setImage={setImage}
+                setShow={setShow}
+              />
+            </>
+          )}
 
           <div>
-            <Addpost />
+            <Addpost setShow={setShow} show={show} />
           </div>
+
           <div className="mt-3">
             <button className="w-full bg-white-100 p-2 font-noto font-semibold text-black text-base rounded-md hover:text-white hover:bg-black transition-all ease-linear duration-100">
               Post

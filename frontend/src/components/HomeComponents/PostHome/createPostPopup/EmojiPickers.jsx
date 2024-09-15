@@ -2,7 +2,7 @@ import EmojiPicker from "emoji-picker-react";
 import React, { useEffect, useState } from "react";
 import Feeling from "../../../../svg/Feeling";
 
-const EmojiPickers = ({ text, setText, textRef }) => {
+const EmojiPickers = ({ text, setText, textRef, changePart }) => {
   const [picker, setPicker] = useState(false);
   const [cursorPosition, setCursorPosition] = useState();
 
@@ -21,16 +21,53 @@ const EmojiPickers = ({ text, setText, textRef }) => {
   }, [cursorPosition]);
 
   return (
-    <div className=" cursor-pointer relative">
-      <div onClick={() => setPicker((prev) => !prev)}>
-        <Feeling />
+    <>
+      <div
+        className={`${
+          changePart ? "flex items-center justify-between mt-5" : "mt-5"
+        }`}
+      >
+        <textarea
+          ref={textRef}
+          value={text}
+          maxLength={100}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="What's up say something"
+          className={`${
+            changePart
+              ? "w-11/12 min-h-24 outline-none p-2 font-noto font-medium text-base"
+              : "w-full min-h-24 outline-none p-2 font-noto font-medium text-base"
+          }`}
+        />
+        {changePart && (
+          <div className=" cursor-pointer relative">
+            <div onClick={() => setPicker((prev) => !prev)}>
+              <Feeling />
+            </div>
+            {picker && (
+              <div className=" absolute top-0 right-8 z-10">
+                <EmojiPicker onEmojiClick={handleEmoji} />
+              </div>
+            )}
+          </div>
+        )}
       </div>
-      {picker && (
-        <div className=" absolute -top-[460px] -left-[300px]">
-          <EmojiPicker onEmojiClick={handleEmoji} />
+      {!changePart && (
+        <div className="flex items-center justify-between mb-3">
+          <div className="w-10 h-10 bg-gradient-to-r from-cyan-100 to-purple-100 rounded-md cursor-pointer"></div>
+          <div className=" cursor-pointer relative">
+            <div onClick={() => setPicker((prev) => !prev)}>
+              <Feeling />
+            </div>
+            {picker && (
+              <div className=" absolute -top-[460px] -left-[300px]">
+                <EmojiPicker onEmojiClick={handleEmoji} />
+              </div>
+            )}
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
