@@ -14,6 +14,7 @@ import LoggedinUser from "./privateRouter/LoggedinUser";
 import RootLayout from "./components/RootLayout";
 import "swiper/css";
 import CreatePostPopup from "./components/HomeComponents/PostHome/createPostPopup";
+import ActivatePage from "./pages/Home/ActivatePage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route element={<LoggedinUser />}>
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/activate/:token" element={<ActivatePage />} />
         </Route>
       </Route>
       <Route element={<NotLoggedinUser />}>

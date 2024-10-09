@@ -3,24 +3,48 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_BACKEND_URL
+    baseUrl: import.meta.env.VITE_BACKEND_URL,
   }),
-  endpoints: (builder) =>({
+  endpoints: (builder) => ({
     addUser: builder.mutation({
-      query: (body)=>({
+      query: (body) => ({
         url: "/api/v1/auth",
         method: "POST",
-        body
-      })
+        body,
+      }),
     }),
     loggedInUser: builder.mutation({
-      query: (body)=>({
+      query: (body) => ({
         url: "/api/v1/auth/login",
         method: "POST",
-        body
-      })
-    })
-  })
-})
+        body,
+      }),
+    }),
+    verifiedUser: builder.mutation({
+      query: ({ token, userToken }) => ({
+        url: "/api/v1/auth/activate",
+        method: "POST",
+        body: { token },
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      }),
+    }),
+    reVerification: builder.mutation({
+      query: (token) => ({
+        url: "/api/v1/auth/reVerification",
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    }),
+  }),
+});
 
-export const { useAddUserMutation, useLoggedInUserMutation } = authApi
+export const {
+  useAddUserMutation,
+  useLoggedInUserMutation,
+  useVerifiedUserMutation,
+  useReVerificationMutation,
+} = authApi;

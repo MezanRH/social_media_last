@@ -7,17 +7,20 @@ import Imageviewer from "./Imageviewer";
 const CreatePostPopup = () => {
   const [text, setText] = useState("");
   const [show, setShow] = useState(false);
+  const [close, setClose] = useState(false);
   const [image, setImage] = useState([]);
   const textRef = useRef(null);
 
   return (
+    <>
+    <div className={`${!close && "hidden"}`}>
     <div className=" absolute top-0 left-0 w-full bg-blur h-screen z-20 flex justify-center items-center">
       <div className="w-[35%] bg-white shadow-md">
         <div className="border-b border-white-100 p-2 relative">
           <h3 className="font-noto font-bold text-lg text-black text-center">
             Create Post
           </h3>
-          <div className=" absolute top-1 right-2 text-secondary_color cursor-pointer">
+          <div className={`absolute top-1 right-2 text-secondary_color cursor-pointer`} onClick={()=>setClose(true)}>
             <CircleCloseIcon />
           </div>
         </div>
@@ -57,6 +60,8 @@ const CreatePostPopup = () => {
         </div>
       </div>
     </div>
+    </div>
+    </>
   );
 };
 
